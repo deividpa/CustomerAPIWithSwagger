@@ -8,30 +8,43 @@ namespace backend.Controllers
     public class CustomerController : Controller
     {
         [HttpGet]
-        public async Task<List<CustomerDTO>> GetCustomers()
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CustomerDTO))]
+        public async Task<IActionResult> GetCustomers()
         {
             throw new NotImplementedException();
         }
 
         [HttpPost]
-        public async Task<CustomerDTO> CreateCustomer(CreateCustomerDTO customer)
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(CustomerDTO))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> CreateCustomer(CreateCustomerDTO customer)
         {
-            throw new NotImplementedException();
+            var empty = new CustomerDTO();
+
+            return new CreatedResult($"http://localhost:7269/api/customer/{empty.id}", null);
         }
 
         [HttpGet("{id}")]
-        public async Task<CustomerDTO> GetCustomer(long id) {
-            throw new NotImplementedException();
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CustomerDTO))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetCustomer(long id) {
+            var empty = new CustomerDTO();
+
+            return new OkObjectResult(empty);
         }
 
         [HttpPut]
-        public async Task<CustomerDTO> UpdateCustomer(CustomerDTO customer)
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CustomerDTO))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> UpdateCustomer(CustomerDTO customer)
         {
             throw new NotImplementedException();
         }
 
         [HttpDelete("{id}")]
-        public async Task<bool> DeleteCustomer(long id)
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> DeleteCustomer(long id)
         {
             throw new NotImplementedException();
         }
